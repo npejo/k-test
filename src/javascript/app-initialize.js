@@ -1,0 +1,5 @@
+var FluidL = {
+    Views: {},
+    Models: {}
+};
+

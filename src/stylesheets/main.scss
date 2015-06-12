@@ -1,0 +1,30 @@
+@charset "utf-8";
+
+$base-font-family: Helvetica, Arial, sans-serif;
+$base-font-size: 20px;
+$small-font-size: $base-font-size * 0.75;
+$base-line-height: 1.35em;
+
+$spacing-unit: 25px;
+
+$text-color: #333333;
+$background-color: #fafafa;
+
+$grey-color: #9a9a9a;
+
+// Width of the containers
+$outer-container-max: 960px;
+$content-max: 860px;
+
+$smaller-device: 960px;
+
+@mixin media-query($size) {
+  @media screen and (max-width: $size) {
+    @content;
+  }
+}
+
+// Import partials from `scss` directory
+@import
+  "scss/base",
+  "scss/layout";
