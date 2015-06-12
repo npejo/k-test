@@ -26,13 +26,11 @@
     };
 
     MainContainerView.prototype.handleBoxOver = function() {
-        console.log('main says: box is hovered!');
         this.element.style.border = '10px solid black';
         this.element.style.padding = '40px';
     };
 
     MainContainerView.prototype.handleBoxOut = function() {
-        console.log('main says: box is hovered!');
         this.element.style.border = '1px solid black';
         this.element.style.padding = '50px';
     };

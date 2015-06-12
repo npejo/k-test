@@ -33,6 +33,8 @@
         // subscribe to events on elements within this view
         this.addListener('.box', 'mouseenter', this.handleBoxOver.bind(this));
         this.addListener('.box', 'mouseleave', this.handleBoxOut.bind(this));
+        this.addListener('.box', 'click', this.addNewBox.bind(this));
+        this.addListener('.js-box-remove', 'click', this.removeSelf.bind(this));
     };
 
     BoxView.prototype.init = function(options) {
@@ -98,6 +100,18 @@
         this.setupBoxContentTpl(boxContent);
     };
 
+    BoxView.prototype.removeSelf = function() {
+        event.preventDefault();
+        event.stopPropagation();
+
+        this.appEvents.publish('box-removed', this.index);
+        this.element.remove();
+    };
+
+    BoxView.prototype.addNewBox = function() {
+        this.appEvents.publish('box-added', this.index + 1);
+    };
+
     BoxView.prototype.getGridRowClass = function() {
         var giClass = 'col-2-6';
 
@@ -124,18 +138,29 @@
                 bgColor = '#2F9039';
                 break;
             case 0:
-                bgColor = '#3C3CE8';
+                bgColor = '#5189AD';
                 break;
         }
 
         return bgColor;
     };
 
-    BoxView.prototype.createBoxElement = function() {
+    //BoxView.prototype.createBoxElement = function() {
+    //
+    //
+    //
+    //    return box;
+    //};
 
-
-
-        return box;
+    BoxView.prototype.getData = function() {
+        return {
+            id: this.id,
+            index: this.index,
+            gridRow: this.gridRow,
+            prevBox: this.prevBox,
+            nextBox: this.nextBox,
+            isLast: this.isLast
+        }
     };
 
     BoxView.prototype.setupBoxWrapperTpl = function(boxWrapper) {
@@ -154,12 +179,18 @@
 
     BoxView.prototype.setupBoxHeaderTpl = function(boxHeader) {
         boxHeader.className = 'box-header';
-        boxHeader.innerHTML = this.id;
+        boxHeader.innerHTML = '<div class="box-section f-left box-header-info">[' + this.id + ']</div>' +
+            '<div class="box-section f-right box-header-actions">' +
+                '<button class="js-box-remove">X</button>' +
+            '</div>';
     };
 
     BoxView.prototype.setupBoxContentTpl = function(boxContent) {
+        var prevBox = this.prevBox === null ? '' : this.prevBox;
+        var nextBox = this.nextBox === null ? '' : this.nextBox;
         boxContent.className = 'box-content';
-        boxContent.innerHTML = this.prevBox + ' - ' + this.nextBox;
+        boxContent.innerHTML = '<div class="box-section f-left">' + prevBox + '</div>' +
+            '<div class="box-section f-right">' + nextBox + '</div>';
     };
 
     app.Views.BoxView = BoxView;

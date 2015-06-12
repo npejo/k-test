@@ -7,14 +7,14 @@
      *
      * @constructor
      */
-    var Events = function() {
+    var EventsModel = function() {
         // object that keeps all event subscriptions
         // eventName: [callback1, callback2...]
         this.subscriptions = {};
     };
 
 
-    Events.prototype = {
+    EventsModel.prototype = {
         /**
          * Add subscription that will invoke the callback method when specific event occurs
          *
@@ -43,5 +43,5 @@
         }
     };
 
-    app.Models.Events = Events;
+    app.Models.EventsModel = EventsModel;
 })(FluidL);
