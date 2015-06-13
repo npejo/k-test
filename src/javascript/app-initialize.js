@@ -6,4 +6,3 @@ var FluidL = {
     Views: {},
     Models: {}
 };
-
