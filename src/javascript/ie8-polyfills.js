@@ -155,7 +155,7 @@
     }
 
 // helper method for checking RGBA support
-    function supportsRGBA() {
+    window.supportsRGBA = function() {
         if (!('result' in arguments.callee)) {
             var scriptElement = document.getElementsByTagName('script')[0];
             var prevColor = scriptElement.style.color;
@@ -173,5 +173,5 @@
             }
         }
         return arguments.callee.result;
-    }
+    };
 })();

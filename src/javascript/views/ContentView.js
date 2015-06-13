@@ -324,7 +324,7 @@
         var newShade = shade + shadeAdjustment;
 
         // check with polyfill method if the browser supports rgba. IE8 doesn't supports it
-        if (supportsRGBA()) {
+        if (window.supportsRGBA(this.element)) {
             this.element.style.backgroundColor = 'rgba(' + newShade + ',' + newShade + ',' + newShade + ', 0.8)';
         } else {
             this.element.style.backgroundColor = 'rgb(' + newShade + ',' + newShade + ',' + newShade + ')';
