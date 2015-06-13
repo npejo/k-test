@@ -7,11 +7,14 @@
             currentBoxesItemName: 'FluidL-currentBoxes'
         };
 
-        this.defaultStats = {
+        this.stats = {
             nbrRemoved: 0,
             removedBoxesIds: []
         };
-        this.stats = JSON.parse(localStorage.getItem(this.options.statsItemName)) || this.defaultStats;
+        var savedStats = localStorage.getItem(this.options.statsItemName);
+        if (savedStats) {
+            this.stats = JSON.parse(localStorage.getItem(this.options.statsItemName));
+        }
         this.currentBoxes = JSON.parse(localStorage.getItem(this.options.currentBoxesItemName)) || [];
     };
 
@@ -52,7 +55,10 @@
 
         reset: function() {
             this.currentBoxes = [];
-            this.stats = this.defaultStats;
+            this.stats = {
+                nbrRemoved: 0,
+                removedBoxesIds: []
+            };
 
             this.saveBoxes();
             this.saveStats();

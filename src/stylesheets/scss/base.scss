@@ -20,13 +20,17 @@ html {
 }
 body {
   font-family: $base-font-family;
-  font-size: $base-font-size;
   line-height: $base-line-height;
   font-weight: 300;
   color: $text-color;
   background-color: $background-color;
-  -webkit-text-size-adjust: 100%;
   min-height:100%;
+  margin-top: 70px;
+  font-size: $base-font-size;
+
+  @include media-query($smaller-device) {
+    font-size: $small-font-size;
+  }
 }
 
 /**
@@ -67,12 +71,20 @@ a:active, a:visited {
   text-align: right;
 }
 
+.text-success {
+  color: #31708f;
+}
+
 .f-left {
   float: left;
 }
 
 .f-right {
   float: right;
+}
+
+.btn {
+  padding: 5px;
 }
 
 .hidden {

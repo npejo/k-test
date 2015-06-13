@@ -1,14 +1,3 @@
-#app-info-box {
-  position: fixed;
-  left: 0%;
-  top: 0px;
-  z-index: 10000;
-  background: #fafafa;
-  width: 100%;
-  text-align: center;
-  font-size: small;
-}
-
 .main-container {
   max-width: $outer-container-max;
   margin: $spacing-unit auto;
@@ -18,8 +7,6 @@
 
   @include media-query($smaller-device) {
     margin: $spacing-unit $spacing-unit/2;
-    padding: $spacing-unit;
-    min-width: 600px;
   }
 }
 
@@ -36,33 +23,64 @@
   padding:($spacing-unit * 2) ($spacing-unit * 2) ($spacing-unit * 1.6) ($spacing-unit * 2);
   border: 1px solid black;
   @extend %clearfix;
-
-  @include media-query($smaller-device) {
-    padding: $spacing-unit;
-  }
 }
 
 [class*="col-"] {
   float: left;
-  height: $spacing-unit * 5;
   margin: 1%;
+}
+
+.top-fixed-header {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 10000;
+  background: #fafafa;
+  width: 100%;
+  text-align: center;
+  border-bottom: 3px solid #eeeeee;
+}
+
+.app-info-box {
+  max-width: 960px;
+  margin: 0 auto;
+  @extend %clearfix;
+}
+
+.info-msg {
+  font-weight: bold;
+}
+
+.info-title {
+  cursor: pointer;
+}
+
+.box-wrapper {
+  height: $spacing-unit * 5;
 }
 
 .box {
   position: relative;
-  overflow: auto;
+  overflow: visible;
   width: 100%;
   height: 100%;
   text-align: center;
   background-color: #ddd;
   border: 1px solid black;
   transition: background-color 0.8s ease-out;
+  cursor: pointer;
 
   &:hover {
     border: 5px solid black;
     > .box-header {
       margin-top: -4px;
       margin-bottom: 4px;
+
+      @include media-query($smaller-device) {
+        .box-section {
+          margin-right: 1px;
+        }
+      }
     }
   }
 
@@ -86,6 +104,10 @@
 
 .box-section {
   margin: 10px;
+
+  @include media-query($smaller-device) {
+      margin: 5px;
+  }
 }
 
 .box-header-info {
