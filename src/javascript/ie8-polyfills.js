@@ -99,3 +99,26 @@ if (!Function.prototype.bind) {
 if( !window.getComputedStyle) {
     window.getComputedStyle = function(e) {return e.currentStyle};
 }
+
+function supportsRGBA()
+{
+    if(!('result' in arguments.callee))
+    {
+        var scriptElement = document.getElementsByTagName('script')[0];
+        var prevColor = scriptElement.style.color;
+        var testColor = 'rgba(0, 0, 0, 0.5)';
+        if(prevColor == testColor)
+        {
+            arguments.callee.result = true;
+        }
+        else
+        {
+            try {
+                scriptElement.style.color = testColor;
+            } catch(e) {}
+            arguments.callee.result = scriptElement.style.color != prevColor;
+            scriptElement.style.color = prevColor;
+        }
+    }
+    return arguments.callee.result;
+}

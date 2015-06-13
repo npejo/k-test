@@ -322,7 +322,13 @@
         var shade = parseInt(bgColor.split(',')[1]) || defaultShade;
 
         var newShade = shade + shadeAdjustment;
-        this.element.style.backgroundColor = 'rgba(' + newShade + ',' + newShade + ',' + newShade + ', 0.8)';
+
+        // check with polyfill method if the browser supports rgba. IE8 doesn't supports it
+        if (supportsRGBA()) {
+            this.element.style.backgroundColor = 'rgba(' + newShade + ',' + newShade + ',' + newShade + ', 0.8)';
+        } else {
+            this.element.style.backgroundColor = 'rgb(' + newShade + ',' + newShade + ',' + newShade + ')';
+        }
     };
 
     app.Views.ContentView = ContentView;
