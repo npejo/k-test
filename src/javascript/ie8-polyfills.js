@@ -95,3 +95,7 @@ if (!Function.prototype.bind) {
         return this.fireEvent("on" + eventObject.type, eventObject);
     };
 })(Window.prototype, HTMLDocument.prototype, Element.prototype, "addEventListener", "removeEventListener", "dispatchEvent", []);
+
+if( !window.getComputedStyle) {
+    window.getComputedStyle = function(e) {return e.currentStyle};
+}
