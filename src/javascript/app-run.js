@@ -6,11 +6,11 @@
     var appState = new app.Models.StateModel();
 
     // create and initialize mainContainerView instance
-    var mainContainerView = new app.Views.MainContainerView({
-        element: document.getElementsByClassName('main-container')[0],
-        appEvents: appEvents
-    });
-    mainContainerView.addEventListeners();
+    //var mainContainerView = new app.Views.MainContainerView({
+    //    element: document.getElementsByClassName('main-container')[0],
+    //    appEvents: appEvents
+    //});
+    //mainContainerView.addEventListeners();
 
     // create and initialize contentView instance
     var contentView = new app.Views.ContentView({
