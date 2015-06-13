@@ -84,7 +84,7 @@
      * @param callback
      */
     CoreView.prototype.addListenerByClass = function(className, eventName, callback) {
-        var elements = this.element.getElementsByClassName(className);
+        var elements = this.element.querySelectorAll('.' + className);
         if (!elements.length) {
             return;
         }

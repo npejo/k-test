@@ -120,11 +120,11 @@
         this.setupBoxWrapperTpl(this.element);
 
         // update box color
-        var box = this.element.getElementsByClassName('box')[0];
+        var box = this.element.querySelectorAll('.box')[0];
         this.setupBoxTpl(box);
 
         // update boxContent
-        var boxContent = box.getElementsByClassName('box-content')[0];
+        var boxContent = box.querySelectorAll('.box-content')[0];
         this.setupBoxContentTpl(boxContent);
     };
 
