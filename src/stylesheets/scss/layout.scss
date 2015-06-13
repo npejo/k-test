@@ -11,7 +11,7 @@
 }
 
 .main-bg-image {
-  background: url("../images/main-bg-image-1.jpg") no-repeat 50%;
+  background: url("../images/main-bg-image.jpg") no-repeat 50%;
   background-size: cover;
 }
 
@@ -35,10 +35,10 @@
   left: 0;
   top: 0;
   z-index: 10000;
-  background: #fafafa;
+  background: $background-color;
   width: 100%;
   text-align: center;
-  border-bottom: 3px solid #eeeeee;
+  border-bottom: 3px solid $grey-light-color;
 }
 
 .app-info-box {

@@ -25,11 +25,19 @@
         this.appEvents.subscribe('box-out', this.handleBoxOut.bind(this));
     };
 
+    /**
+     * Handler for the app event `box-over`
+     * Update the style of the main container when this event occurs
+     */
     MainContainerView.prototype.handleBoxOver = function() {
         this.element.style.border = '10px solid black';
         this.element.style.padding = '40px';
     };
 
+    /**
+     * Handler for the app event `box-out`
+     * Update the style of the main container when this event occurs
+     */
     MainContainerView.prototype.handleBoxOut = function() {
         this.element.style.border = '1px solid black';
         this.element.style.padding = '50px';
