@@ -86,6 +86,17 @@ a:active, a:visited {
   clear: both;
 }
 
+#app-info-box {
+  position: fixed;
+  left: 0%;
+  top: 0px;
+  z-index: 10000;
+  background: #fafafa;
+  width: 100%;
+  text-align: center;
+  font-size: small;
+}
+
 .main-container {
   max-width: 960px;
   margin: 25px auto;
@@ -94,8 +105,9 @@ a:active, a:visited {
 }
 @media screen and (max-width: 960px) {
   .main-container {
-    margin: 25px;
+    margin: 25px 12.5px;
     padding: 25px;
+    min-width: 600px;
   }
 }
 

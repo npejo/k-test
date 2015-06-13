@@ -1,3 +1,14 @@
+#app-info-box {
+  position: fixed;
+  left: 0%;
+  top: 0px;
+  z-index: 10000;
+  background: #fafafa;
+  width: 100%;
+  text-align: center;
+  font-size: small;
+}
+
 .main-container {
   max-width: $outer-container-max;
   margin: $spacing-unit auto;
@@ -6,8 +17,9 @@
   @extend %clearfix;
 
   @include media-query($smaller-device) {
-    margin: $spacing-unit;
+    margin: $spacing-unit $spacing-unit/2;
     padding: $spacing-unit;
+    min-width: 600px;
   }
 }
 
