@@ -3,7 +3,6 @@
   margin: $spacing-unit auto;
   padding: $spacing-unit * 2;
   border: 1px solid black;
-  transition: border 0.2s ease-out;
   @extend %clearfix;
 
   @include media-query($smaller-device) {
@@ -25,7 +24,6 @@
   margin: 0 auto;
   padding:($spacing-unit * 2) ($spacing-unit * 2) ($spacing-unit * 1.6) ($spacing-unit * 2);
   border: 1px solid black;
-  transition: all 0.2s ease-out;
   @extend %clearfix;
 
   @include media-query($smaller-device) {
@@ -47,7 +45,6 @@
   text-align: center;
   background-color: #ddd;
   border: 1px solid black;
-  transition: border 0.2s ease-out;
   transition: background-color 0.8s ease-out;
 
   &:hover {

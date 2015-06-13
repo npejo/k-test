@@ -16,48 +16,40 @@
 
         // array of box view objects that are currently displayed
         this.boxes = [];
-        this.totalBoxes = 0;
     };
 
     // chain the prototype of the parent object
     ContentView.prototype = Object.create(app.Views.CoreView.prototype);
 
     ContentView.prototype.initialize = function() {
-        var currentBoxes = this.appState.getCurrentBoxes();
 
-        if (currentBoxes.length > 0) {
+        if (this.appState.hasSavedState()) {
+            var currentBoxes = this.appState.getCurrentBoxes();
             for(var i = 0; i < currentBoxes.length; i++) {
                 this.addBoxView(currentBoxes[i]);
             }
         } else {
             this.addBoxViewOnIndex(0);
+            this.appState.setCurrentBoxes([this.boxes[0].getData()]);
         }
         // load the previously saved state from localStorage
         // if nothing, draw one box
-        //this.addBoxView();
-        //this.addBoxView();
-        //this.addBoxView();
-        //this.addBoxView();
-        //this.addBoxView();
-        //this.addBoxView();
-        //this.addBoxView();
-        //this.addBoxViewOnIndex(3);
-        var self = this;
-        setTimeout(function() {
-            self.addBoxViewOnIndex(6);
-        }, 2000);
-        setTimeout(function() {
-            self.addBoxViewOnIndex(2);
-        }, 4000);
-        setTimeout(function() {
-            self.addBoxViewOnIndex(1);
-        }, 6000);
-        setTimeout(function() {
-            self.addBoxViewOnIndex(10);
-        }, 8000);
-        setTimeout(function() {
-            self.addBoxViewOnIndex(6);
-        }, 10000);
+        //var self = this;
+        //setTimeout(function() {
+        //    self.addBoxViewOnIndex(6);
+        //}, 2000);
+        //setTimeout(function() {
+        //    self.addBoxViewOnIndex(2);
+        //}, 4000);
+        //setTimeout(function() {
+        //    self.addBoxViewOnIndex(1);
+        //}, 6000);
+        //setTimeout(function() {
+        //    self.addBoxViewOnIndex(10);
+        //}, 8000);
+        //setTimeout(function() {
+        //    self.addBoxViewOnIndex(6);
+        //}, 10000);
 
         this.addEventListeners();
     };
@@ -66,7 +58,6 @@
      * Bind event actions on elements within the view
      */
     ContentView.prototype.addEventListeners = function() {
-        // subscribe to application level event
         this.appEvents.subscribe('box-over', this.handleBoxOver.bind(this));
         this.appEvents.subscribe('box-out', this.handleBoxOut.bind(this));
         this.appEvents.subscribe('box-removed', this.handleRemoveBoxView.bind(this));
@@ -90,17 +81,14 @@
         var boxView = new app.Views.BoxView(boxData);
         this.boxes.splice(boxIndex, 0, boxView);
 
-        this.drawBoxView(boxView);
+        this.drawBoxView(boxView, true);
     };
 
     ContentView.prototype.addBoxViewOnIndex = function(index) {
-        // update the counter for total number of added and removed boxes
-        this.totalBoxes++;
-
         var boxIndex = this.validateBoxIndex(index);
 
         var boxView = new app.Views.BoxView({
-            id: this.totalBoxes,
+            id: this.appState.getTotalBoxes() + 1,
             appEvents: this.appEvents
         });
         this.boxes.splice(boxIndex, 0, boxView);
@@ -109,25 +97,28 @@
         this.initBoxView(boxView, boxIndex, isLast);
 
         this.drawBoxView(boxView);
+        this.updateBoxesFromIndex(boxIndex - 1);
     };
 
-    ContentView.prototype.drawBoxView = function(boxView) {
+    ContentView.prototype.drawBoxView = function(boxView, append) {
         var newBoxTemplate = boxView.getTemplate();
-        if (boxView.isLast) {
+        if (boxView.isLast || append) {
             this.element.appendChild(newBoxTemplate);
         } else {
             this.element.insertBefore(newBoxTemplate, this.boxes[boxView.index + 1].element);
         }
 
         boxView.addEventListeners();
-
-        this.updateBoxesFromIndex(boxView.index - 1);
     };
 
     ContentView.prototype.handleRemoveBoxView = function(boxIndex) {
+        var boxId = this.boxes[boxIndex].getId();
+
         this.boxes.splice(boxIndex, 1);
         this.updateBoxesFromIndex(boxIndex - 1);
         this.setBgColor('lighter');
+
+        this.appState.boxRemoved(boxId);
     };
 
     ContentView.prototype.handleAddingBoxView = function(boxIndex) {
@@ -203,11 +194,10 @@
     };
 
     ContentView.prototype.updateBoxesFromIndex = function(index) {
-        if (index < 0) {
-            return;
-        }
-
         var nbrBoxes = this.boxes.length;
+
+        index = index < 0 ? 0 : index;
+
         var boxesData = [];
 
         for (var i = index; i < nbrBoxes; i++) {
@@ -218,13 +208,13 @@
             boxesData.push(curBox.getData());
         }
 
-        console.log(boxesData);
-        //this.appState.updateStateFromIndex(index, boxesData);
+        this.appState.setCurrentBoxes(boxesData, index);
     };
 
     ContentView.prototype.setBgColor = function(direction) {
         var addition = direction === 'darker' ? '030303' : '-030303';
-        //console.log(this.element.style);
+        var sty = window.getComputedStyle(this.element);
+        console.log(sty.backgroundColor);
         //console.log(parseInt(addition));
     };
 

@@ -8,44 +8,62 @@
         };
 
         this.defaultStats = {
-            nbrBoxes: 0,
             nbrRemoved: 0,
-            removedBoxesIds: [],
-            currentBoxesIds: []
+            removedBoxesIds: []
         };
         this.stats = JSON.parse(localStorage.getItem(this.options.statsItemName)) || this.defaultStats;
         this.currentBoxes = JSON.parse(localStorage.getItem(this.options.currentBoxesItemName)) || [];
     };
 
-
     StateModel.prototype = {
+        hasSavedState: function() {
+            return localStorage.getItem(this.options.currentBoxesItemName) !== null;
+        },
+
         getCurrentBoxes: function() {
             return this.currentBoxes;
         },
 
         getStats: function() {
+            this.stats.nbrBoxes = this.currentBoxes.length;
             return this.stats;
         },
 
-        updateState: function(currentBoxes, addedBox, removedBox) {
-            this.setCurrentBoxes(currentBoxes);
-
-            //if (addedBox) {
-            //
-            //}
-        },
-        reset: function(currentBoxes) {
-            this.setCurrentBoxes(currentBoxes);
+        getTotalBoxes: function() {
+            return this.currentBoxes.length + this.stats.nbrRemoved;
         },
 
-        setCurrentBoxes: function(currentBoxes) {
-            this.currentBoxes = currentBoxes;
-            localStorage.setItem(this.options.currentBoxesItemName, JSON.stringify(currentBoxes));
+        setCurrentBoxes: function(boxesData, toIndex) {
+            if (toIndex) {
+                var boxesBeforeIndex = this.currentBoxes.slice(0, toIndex);
+                this.currentBoxes = boxesBeforeIndex.concat(boxesData);
+            } else {
+                this.currentBoxes = boxesData;
+            }
+
+            this.saveBoxes();
         },
 
-        setStats: function(statsObj) {
-            this.stats = statsObj;
-            localStorage.setItem(this.options.statsItemName, JSON.stringify(statsObj));
+        boxRemoved: function(boxId) {
+            this.stats.nbrRemoved++;
+            this.stats.removedBoxesIds.push(boxId);
+            this.saveStats();
+        },
+
+        reset: function() {
+            this.currentBoxes = [];
+            this.stats = this.defaultStats;
+
+            this.saveBoxes();
+            this.saveStats();
+        },
+
+        saveBoxes: function() {
+            localStorage.setItem(this.options.currentBoxesItemName, JSON.stringify(this.currentBoxes));
+        },
+
+        saveStats: function() {
+            localStorage.setItem(this.options.statsItemName, JSON.stringify(this.stats));
         }
     };
 
