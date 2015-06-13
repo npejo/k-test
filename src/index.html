@@ -11,9 +11,17 @@
     <link rel="stylesheet" href="stylesheets/main.css"/>
 </head>
 <body>
-    <div id="app-info-box">
-        <div>Number of boxes: 10</div>
-        <div>Removed boxes: 5 </div>
+    <div class="top-fixed-header">
+        <div class="app-info-box">
+            <div class="col-3-6 text-left">
+                Displayed Boxes: <span id="nbr-boxes-info" class="info-msg">10</span>,&nbsp;
+                Removed: <span id="nbr-removed-boxes-info" class="info-msg info-title">5</span>&nbsp;
+                <button class="js-reset btn">Reset</button>
+            </div>
+            <div class="col-3-6 text-right" style="vertical-align: bottom">
+                <div id="actions-info-msg" class="info-msg text-success"></div>
+            </div>
+        </div>
     </div>
     <div class="main-container main-bg-image">
         <div class="content"></div>
@@ -24,6 +32,7 @@
     <script src="javascript/models/StateModel.js"></script>
 
     <script src="javascript/views/CoreView.js"></script>
+    <script src="javascript/views/AppInfoView.js"></script>
     <script src="javascript/views/MainContainerView.js"></script>
     <script src="javascript/views/ContentView.js"></script>
     <script src="javascript/views/BoxView.js"></script>

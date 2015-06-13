@@ -97,11 +97,11 @@
         // update boxContent
         var boxContent = box.getElementsByClassName('box-content')[0];
         this.setupBoxContentTpl(boxContent);
-        this.setupBoxContentTpl(boxContent);
     };
 
     BoxView.prototype.removeSelf = function() {
-        this.appEvents.publish('box-removed', this.index);
+        this.appEvents.publish('box-removed', {boxIndex: this.index, boxId: this.id});
+        this.appEvents.publish('box-out');
         this.element.remove();
     };
 

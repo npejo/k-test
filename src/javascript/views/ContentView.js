@@ -29,8 +29,7 @@
                 this.addBoxView(currentBoxes[i]);
             }
         } else {
-            this.addBoxViewOnIndex(0);
-            this.appState.setCurrentBoxes([this.boxes[0].getData()]);
+            this.initContent();
         }
 
         this.setBgColor(-5 * this.boxes.length);
@@ -61,10 +60,12 @@
      * Bind event actions on elements within the view
      */
     ContentView.prototype.addEventListeners = function() {
+        // subscribe to application level event
         this.appEvents.subscribe('box-over', this.handleBoxOver.bind(this));
         this.appEvents.subscribe('box-out', this.handleBoxOut.bind(this));
         this.appEvents.subscribe('box-removed', this.handleRemoveBoxView.bind(this));
         this.appEvents.subscribe('box-added', this.handleAddingBoxView.bind(this));
+        this.appEvents.subscribe('reset-content', this.handleResetContent.bind(this));
     };
 
     ContentView.prototype.handleBoxOver = function() {
@@ -75,6 +76,35 @@
     ContentView.prototype.handleBoxOut = function() {
         this.element.style.padding = '50px 50px 40px 50px';
         this.element.style.border = '1px solid black';
+    };
+
+    ContentView.prototype.handleRemoveBoxView = function(data) {
+        this.boxes.splice(data.boxIndex, 1);
+        this.updateBoxesFromIndex(data.boxIndex - 1);
+        this.setBgColor(5);
+
+        this.appState.boxRemoved(data.boxId);
+    };
+
+    ContentView.prototype.handleAddingBoxView = function(boxIndex) {
+        this.addBoxViewOnIndex(boxIndex);
+        this.setBgColor(-5);
+    };
+
+    ContentView.prototype.handleResetContent = function() {
+        this.initContent();
+    };
+
+    ContentView.prototype.initContent = function() {
+        if (this.boxes.length) {
+            for (var i = 0; i < this.boxes.length; i++) {
+                this.boxes[i].element.remove();
+            }
+            this.boxes = [];
+        }
+
+        this.addBoxViewOnIndex(0);
+        this.appState.setCurrentBoxes([this.boxes[0].getData()]);
     };
 
     ContentView.prototype.addBoxView = function(boxData) {
@@ -112,21 +142,6 @@
         }
 
         boxView.addEventListeners();
-    };
-
-    ContentView.prototype.handleRemoveBoxView = function(boxIndex) {
-        var boxId = this.boxes[boxIndex].getId();
-
-        this.boxes.splice(boxIndex, 1);
-        this.updateBoxesFromIndex(boxIndex - 1);
-        this.setBgColor(5);
-
-        this.appState.boxRemoved(boxId);
-    };
-
-    ContentView.prototype.handleAddingBoxView = function(boxIndex) {
-        this.addBoxViewOnIndex(boxIndex);
-        this.setBgColor(-5);
     };
 
     ContentView.prototype.initBoxView = function(boxView, boxIndex, isLast) {
