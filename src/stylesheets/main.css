@@ -106,7 +106,7 @@ a:active, a:visited {
 
 .content {
   position: relative;
-  background-color: #777777;
+  background-color: rgba(220, 220, 220, 0.8);
   max-width: 860px;
   margin: 0 auto;
   padding: 50px 50px 40px 50px;

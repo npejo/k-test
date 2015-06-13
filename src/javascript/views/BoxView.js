@@ -101,9 +101,6 @@
     };
 
     BoxView.prototype.removeSelf = function() {
-        event.preventDefault();
-        event.stopPropagation();
-
         this.appEvents.publish('box-removed', this.index);
         this.element.remove();
     };
@@ -181,7 +178,7 @@
         boxHeader.className = 'box-header';
         boxHeader.innerHTML = '<div class="box-section f-left box-header-info">[' + this.id + ']</div>' +
             '<div class="box-section f-right box-header-actions">' +
-                '<button class="js-box-remove">X</button>' +
+                '<button class="js-box-remove" onclick="javascript:event.stopPropagation();">X</button>' +
             '</div>';
     };
 

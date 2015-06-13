@@ -32,6 +32,9 @@
             this.addBoxViewOnIndex(0);
             this.appState.setCurrentBoxes([this.boxes[0].getData()]);
         }
+
+        this.setBgColor(-5 * this.boxes.length);
+
         // load the previously saved state from localStorage
         // if nothing, draw one box
         //var self = this;
@@ -116,14 +119,14 @@
 
         this.boxes.splice(boxIndex, 1);
         this.updateBoxesFromIndex(boxIndex - 1);
-        this.setBgColor('lighter');
+        this.setBgColor(5);
 
         this.appState.boxRemoved(boxId);
     };
 
     ContentView.prototype.handleAddingBoxView = function(boxIndex) {
         this.addBoxViewOnIndex(boxIndex);
-        this.setBgColor('darker');
+        this.setBgColor(-5);
     };
 
     ContentView.prototype.initBoxView = function(boxView, boxIndex, isLast) {
@@ -211,11 +214,14 @@
         this.appState.setCurrentBoxes(boxesData, index);
     };
 
-    ContentView.prototype.setBgColor = function(direction) {
-        var addition = direction === 'darker' ? '030303' : '-030303';
-        var sty = window.getComputedStyle(this.element);
-        console.log(sty.backgroundColor);
-        //console.log(parseInt(addition));
+    ContentView.prototype.setBgColor = function(shadeAdjustment) {
+        var defaultShade = 220;
+
+        var bgColor = window.getComputedStyle(this.element).backgroundColor;
+        var shade = parseInt(bgColor.split(',')[1]) || defaultShade;
+
+        var newShade = shade + shadeAdjustment;
+        this.element.style.backgroundColor = 'rgba(' + newShade + ',' + newShade + ',' + newShade + ', 0.8)';
     };
 
     app.Views.ContentView = ContentView;
