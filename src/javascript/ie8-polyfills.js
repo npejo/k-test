@@ -8,9 +8,6 @@
             function Temp() {
             }
 
-            // make a safe reference to Object.prototype.hasOwnProperty
-            var hasOwn = Object.prototype.hasOwnProperty;
-
             return function(O) {
                 // 1. If Type(O) is not Object or Null throw a TypeError exception.
                 if (typeof O != 'object') {
@@ -25,21 +22,7 @@
                 var obj = new Temp();
                 Temp.prototype = null; // Let's not keep a stray reference to O...
 
-                // 4. If the argument Properties is present and not undefined, add
-                //    own properties to obj as if by calling the standard built-in
-                //    function Object.defineProperties with arguments obj and
-                //    Properties.
-                if (arguments.length > 1) {
-                    // Object.defineProperties does ToObject on its first argument.
-                    var Properties = Object(arguments[1]);
-                    for (var prop in Properties) {
-                        if (hasOwn.call(Properties, prop)) {
-                            obj[prop] = Properties[prop];
-                        }
-                    }
-                }
-
-                // 5. Return obj
+                // 4. Return obj
                 return obj;
             };
         })();
@@ -175,3 +158,4 @@
         return arguments.callee.result;
     };
 })();
+

@@ -106,7 +106,8 @@
     ContentView.prototype.initContent = function() {
         if (this.boxes.length) {
             for (var i = 0; i < this.boxes.length; i++) {
-                this.boxes[i].element.remove();
+                var el = this.boxes[i].element;
+                el.parentNode.removeChild(el);
             }
             this.boxes = [];
         }
