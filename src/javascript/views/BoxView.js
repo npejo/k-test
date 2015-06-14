@@ -37,7 +37,7 @@
         this.addListener('.box', 'mouseenter', this.handleBoxOver.bind(this));
         this.addListener('.box', 'mouseleave', this.handleBoxOut.bind(this));
         this.addListener('.box', 'click', this.addNewBox.bind(this));
-        this.addListener('.js-box-remove', 'click', this.removeSelf.bind(this));
+        //this.addListener('.js-box-remove', 'click', this.removeSelf.bind(this));
     };
 
     /**
