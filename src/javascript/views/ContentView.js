@@ -82,9 +82,6 @@
      * @param data
      */
     ContentView.prototype.handleRemoveBoxView = function(data) {
-        var boxElement = this.element.querySelectorAll('.box-wrapper')[data.boxIndex];
-        this.element.removeChild(boxElement);
-
         this.boxes.splice(data.boxIndex, 1);
 
         this.updateBoxesFromIndex(data.boxIndex - 1);
