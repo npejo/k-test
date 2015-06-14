@@ -243,7 +243,7 @@
         boxHeader.className = 'box-header';
         boxHeader.innerHTML = '<div class="box-section f-left box-header-info">[' + this.id + ']</div>' +
             '<div class="box-section f-right box-header-actions">' +
-                '<button class="js-box-remove" onclick="(function(e) {e.stopPropagation();})(event)">X</button>' +
+                '<button class="js-box-remove">X</button>' +
             '</div>';
     };
 
