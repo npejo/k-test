@@ -8,6 +8,11 @@
     <meta name="description" content="Fluid layout, boxes">
 
     <link rel="stylesheet" href="stylesheets/main.css"/>
+    <!--[if lte IE 8]>
+        .main-bg-image {
+            background: none;
+        }
+    <![endif]-->
 </head>
 <body>
     <div class="top-fixed-header">
@@ -23,6 +28,9 @@
         </div>
     </div>
     <div class="main-container main-bg-image">
+        <!--[if lte IE 8]>
+            <img src="images/main-bg-image.jpg"/>
+        <![endif]-->
         <div class="content"></div>
     </div>
     <!-- build:js:dist javascript/main.min.js -->
