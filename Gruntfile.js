@@ -102,6 +102,14 @@ module.exports = function (grunt) {
                     '<%= cfg.dist %>/index.html': '<%= cfg.src %>/index.html'
                 }
             }
+        },
+        mocha: {
+            options: {
+                run: true
+            },
+            all: {
+                src: ['tests/testsrunner.html']
+            }
         }
     });
 
@@ -113,6 +121,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-processhtml');
+    grunt.loadNpmTasks('grunt-mocha');
 
     // Tasks
     grunt.registerTask('default', ['sass:dev', 'watch']);
@@ -125,5 +134,6 @@ module.exports = function (grunt) {
         'uglify:dist',
         'processhtml:dist'
     ]);
+    grunt.registerTask('test', ['mocha']);
 
 };

@@ -34,7 +34,7 @@
         if (this.appState.hasSavedState()) {
             var currentBoxes = this.appState.getCurrentBoxes();
             for(var i = 0; i < currentBoxes.length; i++) {
-                this.addBoxView(currentBoxes[i]);
+                this.appendBoxView(currentBoxes[i]);
             }
         } else {
             this.initContent();
@@ -118,11 +118,11 @@
 
     /**
      * Create new boxView instance using input boxData object
-     * store it in boxes views array and render it
+     * append it in the boxes array and render it
      *
      * @param boxData
      */
-    ContentView.prototype.addBoxView = function(boxData) {
+    ContentView.prototype.appendBoxView = function(boxData) {
         // check if the input `index` in boxData is accepted value in current boxes state
         var boxIndex = this.validateBoxIndex(boxData.index);
 
