@@ -1,5 +1,6 @@
 .main-container {
   max-width: $outer-container-max;
+  min-width: $outer-container-min;
   margin: $spacing-unit auto;
   padding: $spacing-unit * 2;
   border: 1px solid black;
@@ -15,6 +16,7 @@
   background-size: cover;
   filter: progid:DXImageTransform.Microsoft.AlphaImageLoader( src='../images/main-bg-image.jpg', sizingMethod='scale');
   -ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader( src='../images/main-bg-image.jpg', sizingMethod='scale')";
+  zoom:1;
 }
 
 .content {

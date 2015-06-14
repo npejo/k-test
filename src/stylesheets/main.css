@@ -104,6 +104,7 @@ a:active, a:visited {
 
 .main-container {
   max-width: 960px;
+  min-width: 420px;
   margin: 25px auto;
   padding: 50px;
   border: 1px solid black;
@@ -119,6 +120,7 @@ a:active, a:visited {
   background-size: cover;
   filter: progid:DXImageTransform.Microsoft.AlphaImageLoader( src='../images/main-bg-image.jpg', sizingMethod='scale');
   -ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader( src='../images/main-bg-image.jpg', sizingMethod='scale')";
+  zoom: 1;
 }
 
 .content {
