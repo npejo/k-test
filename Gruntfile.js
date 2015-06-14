@@ -74,6 +74,7 @@ module.exports = function (grunt) {
         concat: {
             dist: {
                 src: [
+                    '<%= cfg.scripts %>/ie8-polyfills.js',
                     '<%= cfg.scripts %>/app-initialize.js',
                     '<%= cfg.scripts %>/models/**/*.js',
                     '<%= cfg.scripts %>/views/CoreView.js',
