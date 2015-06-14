@@ -114,6 +114,8 @@ a:active, a:visited {
 .main-bg-image {
   background: url("../images/main-bg-image.jpg") no-repeat 50%;
   background-size: cover;
+  filter: progid:DXImageTransform.Microsoft.AlphaImageLoader( src='../images/main-bg-image.jpg', sizingMethod='scale');
+  -ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader( src='../images/main-bg-image.jpg', sizingMethod='scale')";
 }
 
 .content {
@@ -138,7 +140,7 @@ a:active, a:visited {
   background: #fafafa;
   width: 100%;
   text-align: center;
-  border-bottom: 3px solid #eeeeee;
+  border-bottom: 3px solid #dddddd;
 }
 
 .app-info-box {
