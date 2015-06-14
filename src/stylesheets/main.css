@@ -1,3 +1,6 @@
+@-ms-viewport {
+  width: device-width;
+}
 /**
  * Reset some basic elements
  */

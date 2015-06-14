@@ -25,6 +25,8 @@ $smaller-device: 960px;
   }
 }
 
+@-ms-viewport {width: device-width;}
+
 // Import partials from `scss` directory
 @import
   "scss/base",
