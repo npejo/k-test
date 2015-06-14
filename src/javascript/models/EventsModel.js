@@ -3,7 +3,7 @@
 
     /**
      * Object that handles event subscriptions on application level
-     * Its purpose is to enable interaction between separate components/section in the application
+     * Its purpose is to enable interaction between separate components/views in the application
      *
      * @constructor
      */
@@ -12,7 +12,6 @@
         // eventName: [callback1, callback2...]
         this.subscriptions = {};
     };
-
 
     EventsModel.prototype = {
         /**

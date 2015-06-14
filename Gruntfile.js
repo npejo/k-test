@@ -15,7 +15,6 @@ module.exports = function (grunt) {
     // Project configuration.
     grunt.initConfig({
         cfg: config,
-        pkg: grunt.file.readJSON('package.json'),
         sass: {
             dev: {
                 options: {
@@ -28,7 +27,7 @@ module.exports = function (grunt) {
             },
             dist: {
                 options: {
-                    //style: 'compressed'
+                    style: 'compressed'
                 },
                 files: {
                     '<%= cfg.tmp %>/main.css': '<%= cfg.styles %>/main.scss'
@@ -45,11 +44,21 @@ module.exports = function (grunt) {
             }
         },
         copy: {
-            styles: {
-                expand: true,
-                cwd: '<%= cfg.tmp %>',
-                dest: '<%= cfg.distCss %>',
-                src: ['*.css', '*.map']
+            all: {
+                files: [
+                    {
+                        expand: true,
+                        cwd: '<%= cfg.tmp %>',
+                        dest: '<%= cfg.distCss %>',
+                        src: ['*.css', '*.map']
+                    },
+                    {
+                        expand: true,
+                        cwd: '<%= cfg.src %>',
+                        dest: '<%= cfg.dist %>',
+                        src: ['images/*']
+                    }
+                ]
             }
         },
         watch: {
@@ -57,16 +66,21 @@ module.exports = function (grunt) {
                 files: ['<%= cfg.styles %>/**/*.scss'],
                 tasks: ['build:dev'],
                 options: {
-                    debounceDelay: 250
+                    debounceDelay: 1000
                 }
             }
         },
         concat: {
             dist: {
                 src: [
+                    '<%= cfg.scripts %>/ie8-polyfills.js',
                     '<%= cfg.scripts %>/app-initialize.js',
                     '<%= cfg.scripts %>/models/**/*.js',
-                    '<%= cfg.scripts %>/views/**/*.js',
+                    '<%= cfg.scripts %>/views/CoreView.js',
+                    '<%= cfg.scripts %>/views/MainContainerView.js',
+                    '<%= cfg.scripts %>/views/ContentView.js',
+                    '<%= cfg.scripts %>/views/BoxView.js',
+                    '<%= cfg.scripts %>/views/AppInfoView.js',
                     '<%= cfg.scripts %>/app-run.js'
                 ],
                 dest: '<%= cfg.tmp %>/main.js'
@@ -88,6 +102,14 @@ module.exports = function (grunt) {
                     '<%= cfg.dist %>/index.html': '<%= cfg.src %>/index.html'
                 }
             }
+        },
+        mocha: {
+            options: {
+                run: true
+            },
+            all: {
+                src: ['tests/testsrunner.html']
+            }
         }
     });
 
@@ -99,6 +121,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-processhtml');
+    grunt.loadNpmTasks('grunt-mocha');
 
     // Tasks
     grunt.registerTask('default', ['sass:dev', 'watch']);
@@ -106,10 +129,11 @@ module.exports = function (grunt) {
     grunt.registerTask('build', [
         'sass:dist',
         'autoprefixer:dist',
-        'copy:styles',
+        'copy:all',
         'concat:dist',
         'uglify:dist',
         'processhtml:dist'
     ]);
+    grunt.registerTask('test', ['mocha']);
 
 };

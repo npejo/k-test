@@ -3,15 +3,36 @@
 <head lang="en">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Fluid Layout Example</title>
+    <title>Fluid Layout With Boxes</title>
     <meta name="description" content="Fluid layout, boxes">
 
     <link rel="stylesheet" href="stylesheets/main.css"/>
+    <!--[if lte IE 8]>
+        <style>
+            .main-bg-image {
+                background: none;
+            }
+        </style>
+    <![endif]-->
 </head>
 <body>
-    <div class="main-container">
+    <div class="top-fixed-header">
+        <div class="app-info-box">
+            <div class="col-3-6 text-left">
+                Boxes: <span id="nbr-boxes-info" class="info-msg">10</span>,&nbsp;
+                Removed: <span id="nbr-removed-boxes-info" class="info-msg info-title">5</span>&nbsp;
+                <button class="js-reset btn">Reset</button>
+            </div>
+            <div class="col-3-6 text-right" style="vertical-align: bottom">
+                <div id="actions-info-msg" class="info-msg text-success"></div>
+            </div>
+        </div>
+    </div>
+    <div class="main-container main-bg-image">
+        <!--[if lte IE 8]>
+            <img src="images/main-bg-image.jpg"/>
+        <![endif]-->
         <div class="content"></div>
     </div>
     <script src="javascript/main.min.js"></script>

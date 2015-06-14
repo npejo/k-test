@@ -18,6 +18,7 @@ dl, dd, ol, ul, figure {
 html {
   height: 94%;
 }
+
 body {
   font-family: $base-font-family;
   line-height: $base-line-height;
@@ -72,7 +73,7 @@ a:active, a:visited {
 }
 
 .text-success {
-  color: #31708f;
+  color: $text-success-color;
 }
 
 .f-left {
@@ -95,7 +96,6 @@ a:active, a:visited {
  * Clearfix
  */
 %clearfix {
-
   &:after {
     content: "";
     display: table;
