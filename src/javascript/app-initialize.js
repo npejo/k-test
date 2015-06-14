@@ -4,5 +4,15 @@
  */
 var FluidL = {
     Views: {},
-    Models: {}
+    Models: {},
+    Utils: {
+        // add utility method to the application namespace for browser compatible stopPropagation
+        stopPropagation: function(e) {
+            if(e.stopPropagation) {
+                e.stopPropagation();
+            } else {
+                e.returnValue = false;
+            }
+        }
+    }
 };

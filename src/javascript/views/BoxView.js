@@ -134,9 +134,6 @@
      * Trigger box-out event
      */
     BoxView.prototype.removeSelf = function() {
-        if (window.event) {
-            window.event.stopPropagation();
-        }
         this.appEvents.publish('box-removed', {boxIndex: this.index, boxId: this.id});
         this.appEvents.publish('box-out');
         this.element.parentNode.removeChild(this.element);
@@ -243,7 +240,7 @@
         boxHeader.className = 'box-header';
         boxHeader.innerHTML = '<div class="box-section f-left box-header-info">[' + this.id + ']</div>' +
             '<div class="box-section f-right box-header-actions">' +
-                '<button class="js-box-remove">X</button>' +
+                '<button class="js-box-remove" onclick="FluidL.Utils.stopPropagation(event);">X</button>' +
             '</div>';
     };
 
