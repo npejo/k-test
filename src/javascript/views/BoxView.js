@@ -37,7 +37,7 @@
         this.addListener('.box', 'mouseenter', this.handleBoxOver.bind(this));
         this.addListener('.box', 'mouseleave', this.handleBoxOut.bind(this));
         this.addListener('.box', 'click', this.addNewBox.bind(this));
-        //this.addListener('.js-box-remove', 'click', this.removeSelf.bind(this));
+        this.addListener('.js-box-remove', 'click', this.removeSelf.bind(this));
     };
 
     /**
@@ -240,7 +240,7 @@
         boxHeader.className = 'box-header';
         boxHeader.innerHTML = '<div class="box-section f-left box-header-info">[' + this.id + ']</div>' +
             '<div class="box-section f-right box-header-actions">' +
-                '<button class="js-box-remove">X</button>' +
+                '<button class="js-box-remove" onclick="(function(e) {e.stopPropagation();})(event)">X</button>' +
             '</div>';
     };
 
