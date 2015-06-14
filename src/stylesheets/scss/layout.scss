@@ -13,6 +13,8 @@
 .main-bg-image {
   background: url("../images/main-bg-image.jpg") no-repeat 50%;
   background-size: cover;
+  filter: progid:DXImageTransform.Microsoft.AlphaImageLoader( src='../images/main-bg-image.jpg', sizingMethod='scale');
+  -ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader( src='../images/main-bg-image.jpg', sizingMethod='scale')";
 }
 
 .content {
