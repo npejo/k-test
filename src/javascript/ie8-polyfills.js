@@ -138,24 +138,25 @@
     }
 
 // helper method for checking RGBA support
-    window.supportsRGBA = function() {
-        if (!('result' in arguments.callee)) {
+    function supportsRgba() {
+        if (!('result' in supportsRgba)) {
             var scriptElement = document.getElementsByTagName('script')[0];
             var prevColor = scriptElement.style.color;
             var testColor = 'rgba(0, 0, 0, 0.5)';
             if (prevColor == testColor) {
-                arguments.callee.result = true;
+                supportsRgba.result = true;
             }
             else {
                 try {
                     scriptElement.style.color = testColor;
                 } catch (e) {
                 }
-                arguments.callee.result = scriptElement.style.color != prevColor;
+                supportsRgba.result = scriptElement.style.color != prevColor;
                 scriptElement.style.color = prevColor;
             }
         }
-        return arguments.callee.result;
-    };
+        return supportsRgba.result;
+    }
+    window.supportsRGBA = supportsRgba;
 })();
 
