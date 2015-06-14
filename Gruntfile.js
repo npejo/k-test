@@ -15,7 +15,6 @@ module.exports = function (grunt) {
     // Project configuration.
     grunt.initConfig({
         cfg: config,
-        pkg: grunt.file.readJSON('package.json'),
         sass: {
             dev: {
                 options: {

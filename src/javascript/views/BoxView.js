@@ -136,7 +136,6 @@
     BoxView.prototype.removeSelf = function() {
         this.appEvents.publish('box-removed', {boxIndex: this.index, boxId: this.id});
         this.appEvents.publish('box-out');
-        this.element.parentNode.removeChild(this.element);
     };
 
     /**

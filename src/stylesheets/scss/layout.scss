@@ -46,9 +46,14 @@
 }
 
 .app-info-box {
-  max-width: 960px;
+  max-width: $outer-container-max;
+  min-width: $outer-container-min;
   margin: 0 auto;
   @extend %clearfix;
+
+  @include media-query($smaller-device) {
+      font-size: 14px;
+  }
 }
 
 .info-msg {
@@ -110,7 +115,7 @@
   margin: 10px;
 
   @include media-query($smaller-device) {
-      margin: 5px;
+      margin: 4px;
   }
 }
 
